@@ -1,0 +1,15 @@
+*#
+.#*
+
+*.debug
+logtester
+
+.vscode
+
+/.build
+/.release
+/.tarballs
+
+!/circle.yml
+!/.travis.yml
+!/.promu.yml
