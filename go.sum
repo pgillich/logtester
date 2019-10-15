@@ -89,6 +89,14 @@ github.com/pelletier/go-toml v1.2.0 h1:T5zMGML61Wp+FlcbWjRDT7yAxhJNAiPPLOFECq181
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=
 github.com/pgillich/errorformatter v0.0.0-20191010212115-eabcbecc607f h1:LRdnHVLnxajx7EtZmEMwUOGldPMbejOtGbuqO4jDqWY=
 github.com/pgillich/errorformatter v0.0.0-20191010212115-eabcbecc607f/go.mod h1:LdkhBQPhY8rMZR/piAThAKB21qfj13C1PsHQibHuoqI=
+github.com/pgillich/errorformatter v0.0.0-20191013210032-d1e93474d2f7 h1:+D7kcrfnOGNnOEf2nzXgsgVsDRQM7kucCJGdE4idlxM=
+github.com/pgillich/errorformatter v0.0.0-20191013210032-d1e93474d2f7/go.mod h1:LdkhBQPhY8rMZR/piAThAKB21qfj13C1PsHQibHuoqI=
+github.com/pgillich/errorformatter v0.0.0-20191015184044-f6efffe31161 h1:crQ2FLuId+ws/B7Qhvm/n7jg+N8mWEf3/dggGSJBcIs=
+github.com/pgillich/errorformatter v0.0.0-20191015184044-f6efffe31161/go.mod h1:LdkhBQPhY8rMZR/piAThAKB21qfj13C1PsHQibHuoqI=
+github.com/pgillich/errorformatter v0.0.0-20191015201238-4149119aaeb5 h1:kpGNaeoxCVJpy9h139b/wYIFi/wg1h2tS43P+8SMdRg=
+github.com/pgillich/errorformatter v0.0.0-20191015201238-4149119aaeb5/go.mod h1:LdkhBQPhY8rMZR/piAThAKB21qfj13C1PsHQibHuoqI=
+github.com/pgillich/errorformatter v0.0.0-20191015221832-6db6166f7984 h1:srZj1PB9x5QK+Gnwlrf4NFbJd+CCySw/bx/ow1epNQY=
+github.com/pgillich/errorformatter v0.0.0-20191015221832-6db6166f7984/go.mod h1:LdkhBQPhY8rMZR/piAThAKB21qfj13C1PsHQibHuoqI=
 github.com/pkg/errors v0.8.0/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=

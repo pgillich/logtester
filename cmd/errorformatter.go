@@ -5,12 +5,15 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/pgillich/errorformatter"
-	errorformatter_tester "github.com/pgillich/logtester/errorformatter"
+	"github.com/pgillich/logtester/errorformatter_tester"
 )
 
 const (
 	// OptFormatter is the formatter name
 	OptFormatter = "formatter"
+
+	// OptTestCase is the test case
+	OptTestCase = "testCase"
 
 	// OptFlagExtractDetails extracts errors.Details to logrus.Fields
 	OptFlagExtractDetails = "extractDetails"
@@ -45,9 +48,13 @@ Example commands:
 func init() { // nolint:gochecknoinits
 	RootCmd.AddCommand(errorformatterCmd)
 
-	errorformatterCmd.PersistentFlags().String(OptFormatter, "text", "Text formatter")
+	errorformatterCmd.PersistentFlags().String(OptFormatter, "text", "Formatter: text, syslog, json")
 	// nolint:gosec,errcheck
 	viper.BindPFlag(OptFormatter, errorformatterCmd.PersistentFlags().Lookup(OptFormatter))
+
+	errorformatterCmd.PersistentFlags().String(OptTestCase, "error", "Test Case: info, error, errorhttp")
+	// nolint:gosec,errcheck
+	viper.BindPFlag(OptTestCase, errorformatterCmd.PersistentFlags().Lookup(OptTestCase))
 
 	errorformatterCmd.PersistentFlags().Bool(OptFlagExtractDetails, false, "Extracts errors.Details to logrus.Fields")
 	// nolint:gosec,errcheck
@@ -107,6 +114,7 @@ func testErrorformatter() {
 
 	errorformatter_tester.TryErrorformatter(
 		viper.GetString(OptFormatter),
+		viper.GetString(OptTestCase),
 		flags,
 		viper.GetInt(OptCallStackSkipLast),
 	)
