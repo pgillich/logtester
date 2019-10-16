@@ -11,7 +11,7 @@ func trySampleText() {
 	errorformatter.AddSkipPackageFromStackTrace("github.com/pgillich/logtester")
 
 	// build a new logrus logger
-	logger := errorformatter.NewTextLogger(log.InfoLevel, 0, 0)
+	logger := errorformatter.NewTextLogger(log.InfoLevel, errorformatter.FlagNone, 0)
 
 	// Info log with key-value map
 	logger.WithFields(log.Fields{

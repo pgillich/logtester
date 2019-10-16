@@ -52,7 +52,8 @@ func init() { // nolint:gochecknoinits
 	// nolint:gosec,errcheck
 	viper.BindPFlag(OptFormatter, errorformatterCmd.PersistentFlags().Lookup(OptFormatter))
 
-	errorformatterCmd.PersistentFlags().String(OptTestCase, "error", "Test Case: info, error, errorhttp")
+	// nolint:lll
+	errorformatterCmd.PersistentFlags().String(OptTestCase, "errorhttp", "Test Case: sampletext, samplehttp, info, error, errorhttp")
 	// nolint:gosec,errcheck
 	viper.BindPFlag(OptTestCase, errorformatterCmd.PersistentFlags().Lookup(OptTestCase))
 
