@@ -1,8 +1,8 @@
 /*
-	Package errorformatter_tester test github.com/pgillich/errorformatter
+	Package errfmt_tester test github.com/pgillich/errfmt
 */
 // nolint:stylecheck,golint
-package errorformatter_tester
+package errfmt_tester
 
 import (
 	"fmt"
@@ -10,25 +10,25 @@ import (
 	"os"
 
 	"github.com/juju/rfc/rfc5424"
-	"github.com/pgillich/errorformatter"
+	"github.com/pgillich/errfmt"
 	log "github.com/sirupsen/logrus"
 )
 
 // TryErrorformatter checks the given formatter
 // nolint:gocyclo
 func TryErrorformatter(formatterName string, testCase string, flags int, callStackSkipLast int) {
-	errorformatter.AddSkipPackageFromStackTrace("github.com/pgillich/logtester")
+	errfmt.AddSkipPackageFromStackTrace("github.com/pgillich/logtester")
 
 	var logger *log.Logger
 	switch formatterName {
 	case "text":
-		logger = errorformatter.NewTextLogger(log.InfoLevel, flags, callStackSkipLast)
+		logger = errfmt.NewTextLogger(log.InfoLevel, flags, callStackSkipLast)
 	case "syslog":
-		logger = errorformatter.NewSyslogLogger(log.InfoLevel, flags, callStackSkipLast,
+		logger = errfmt.NewSyslogLogger(log.InfoLevel, flags, callStackSkipLast,
 			rfc5424.FacilityDaemon, rfc5424.Hostname{FQDN: "fqdn.host.com"}, "application",
 			"PID", "")
 	case "json":
-		logger = errorformatter.NewJSONLogger(log.InfoLevel, flags, callStackSkipLast)
+		logger = errfmt.NewJSONLogger(log.InfoLevel, flags, callStackSkipLast)
 	default:
 		fmt.Printf("Unknown formatter: %s\n", formatterName)
 		os.Exit(2)
@@ -52,18 +52,17 @@ func TryErrorformatter(formatterName string, testCase string, flags int, callSta
 }
 
 func tryErrorHTTP(logger *log.Logger) {
-	err := errorformatter.GenerateDeepErrors()
+	err := errfmt.GenerateDeepErrors()
 
 	fmt.Println()
 	respBody := []byte{}
-	errorformatter.ExtractHTTPProblem(&respBody,
-		logger.WithError(err), log.ErrorLevel, http.StatusPreconditionFailed,
-	).Log(log.ErrorLevel, "USER MSG")
+	errfmt.ExtractHTTPProblem(&respBody, http.StatusPreconditionFailed,
+		logger.WithError(err)).Error("USER MSG")
 	fmt.Printf("\n%s\n", string(respBody))
 }
 
 func tryError(logger *log.Logger) {
-	err := errorformatter.GenerateDeepErrors()
+	err := errfmt.GenerateDeepErrors()
 
 	fmt.Println()
 	logger.WithError(err).Error("USER MSG")

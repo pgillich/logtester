@@ -4,8 +4,8 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/pgillich/errorformatter"
-	"github.com/pgillich/logtester/errorformatter_tester"
+	"github.com/pgillich/errfmt"
+	"github.com/pgillich/logtester/errfmt_tester"
 )
 
 const (
@@ -33,12 +33,12 @@ const (
 )
 
 var errorformatterCmd = &cobra.Command{
-	Use:   "errorformatter",
-	Short: "github.com/pgillich/errorformatter",
+	Use:   "errfmt",
+	Short: "github.com/pgillich/errfmt",
 	Long: `Start service.
 Example commands:
 
-./logtester errorformatter --formatter syslog --extractDetails --callStackOnConsole true --callStackInHTTPProblem
+./logtester errfmt --formatter syslog --extractDetails --callStackOnConsole true --callStackInHTTPProblem
 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		testErrorformatter()
@@ -93,27 +93,27 @@ func init() { // nolint:gochecknoinits
 }
 
 func testErrorformatter() {
-	flags := errorformatter.FlagNone
+	flags := errfmt.FlagNone
 	if viper.GetBool(OptFlagExtractDetails) {
-		flags += errorformatter.FlagExtractDetails
+		flags += errfmt.FlagExtractDetails
 	}
 	if viper.GetBool(OptFlagCallStackInFields) {
-		flags += errorformatter.FlagCallStackInFields
+		flags += errfmt.FlagCallStackInFields
 	}
 	if viper.GetBool(OptFlagCallStackOnConsole) {
-		flags += errorformatter.FlagCallStackOnConsole
+		flags += errfmt.FlagCallStackOnConsole
 	}
 	if viper.GetBool(OptFlagCallStackInHTTPProblem) {
-		flags += errorformatter.FlagCallStackInHTTPProblem
+		flags += errfmt.FlagCallStackInHTTPProblem
 	}
 	if viper.GetBool(OptFlagPrintStructFieldNames) {
-		flags += errorformatter.FlagPrintStructFieldNames
+		flags += errfmt.FlagPrintStructFieldNames
 	}
 	if viper.GetBool(OptFlagTrimJSONDquote) {
-		flags += errorformatter.FlagTrimJSONDquote
+		flags += errfmt.FlagTrimJSONDquote
 	}
 
-	errorformatter_tester.TryErrorformatter(
+	errfmt_tester.TryErrorformatter(
 		viper.GetString(OptFormatter),
 		viper.GetString(OptTestCase),
 		flags,

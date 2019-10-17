@@ -1,5 +1,5 @@
 // nolint:stylecheck,golint
-package errorformatter_tester
+package errfmt_tester
 
 import (
 	"fmt"
@@ -7,23 +7,22 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/pgillich/errorformatter"
+	"github.com/pgillich/errfmt"
 	log "github.com/sirupsen/logrus"
 )
 
 func trySampleHTTP() {
 	// register a trim prefix (optional)
-	errorformatter.AddSkipPackageFromStackTrace("github.com/pgillich/logtester")
+	errfmt.AddSkipPackageFromStackTrace("github.com/pgillich/logtester")
 
 	// build a new logrus logger
-	logger := errorformatter.NewTextLogger(log.InfoLevel, 0, 0)
+	logger := errfmt.NewTextLogger(log.InfoLevel, 0, 0)
 
 	// this decorator sets body, header and status, if response error is NOT nil
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		if statusCode, err := doRequest(w, r); err != nil { // calling worker func
-			errorformatter.WriteHTTPProblem( // sending HTTP error
-				w, logger.WithError(err), log.ErrorLevel, statusCode,
-			).Log(log.ErrorLevel, "USER MSG") // logging to the console
+			errfmt.WriteHTTPProblem(w, statusCode, // HTTP error response
+				logger.WithError(err)).Error("USER MSG") // logging to the console
 		}
 	}
 
@@ -50,5 +49,5 @@ doRequest makes the main part of the request.
 */
 // nolint:unparam
 func doRequest(w http.ResponseWriter, r *http.Request) (int, error) {
-	return http.StatusPreconditionFailed, errorformatter.GenerateDeepErrors()
+	return http.StatusPreconditionFailed, errfmt.GenerateDeepErrors()
 }
